@@ -3,6 +3,7 @@
 - [Fiverr Web with Next.js](#fiverr-web-with-nextjs)
   - [Tech stack](#tech-stack)
   - [Features](#features)
+  - [Architecture](#architecture)
   - [Project Structure](#project-structure)
   - [How to run?](#how-to-run)
     - [Requirements](#requirements)
@@ -16,28 +17,44 @@
 - Language: TypeScript
 - Styling: Tailwind CSS v4
 - Package manager: pnpm
-- Linting: ESLint
+- UI Components: Shadcn/ui
+- Linting/Formatting: ESLint, Prettier, EditorConfig
+- Git hooks: Husky, lint-staged, Commitlint
 
 ## Features
+
+## Architecture
+
+> To be documented once the core folder structure and data flow are established.
 
 ## Project Structure
 
 ```text
 ./
+│   .editorconfig
 │   .gitignore
+│   .prettierignore
+│   commitlint.config.mjs
+│   components.json
 │   eslint.config.mjs
 │   next.config.ts
 │   package.json
 │   pnpm-lock.yaml
 │   pnpm-workspace.yaml
 │   postcss.config.mjs
+│   prettier.config.mjs
 │   README.md
 │   tsconfig.json
 │
-├───.github                       # PR template
-├───public                        # Static assets
+├───.github                   # PR template, CI pipeline
+├───.husky                    # Git hooks
+├───docs                      # Documentation
+├───public                    # Static assets
 └───src
-    └───app                       # Routes (App Router)
+    ├───app                   # Routes (App Router)
+    ├───components            # Shared UI components
+    │   └───ui                # Generated shadcn/ui primitives
+    └───lib                   # Cross-cutting, safe-for-client utilities
 ```
 
 ## How to run?
@@ -61,12 +78,18 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Scripts
 
-| Script       | Description              |
-| ------------ | ------------------------ |
-| `pnpm dev`   | Running dev server       |
-| `pnpm build` | Build production         |
-| `pnpm start` | Running production build |
-| `pnpm lint`  | Linting with ESLint      |
+| Script              | Description                                          |
+| ------------------- | ---------------------------------------------------- |
+| `pnpm dev`          | Running dev server                                   |
+| `pnpm build`        | Build production                                     |
+| `pnpm start`        | Running production build                             |
+| `pnpm lint`         | Linting with ESLint                                  |
+| `pnpm lint:fix`     | Fix linting (if ESLint supported)                    |
+| `pnpm format:check` | Validation style code with Prettier                  |
+| `pnpm format`       | Format style code with Prettier                      |
+| `pnpm typecheck`    | Validate type                                        |
+| `pnpm check:all`    | Linting, check formatting, and type-safe             |
+| `pnpm fix:all`      | Fix linting (if ESLint supported), format style code |
 
 ## About Me
 
