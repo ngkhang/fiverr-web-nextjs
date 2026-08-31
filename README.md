@@ -18,6 +18,8 @@
 - Styling: Tailwind CSS v4
 - Package manager: pnpm
 - UI Components: Shadcn/ui
+- Validation: Zod
+- HTTP client: Axios
 - Linting/Formatting: ESLint, Prettier, EditorConfig
 - Git hooks: Husky, lint-staged, Commitlint
 
@@ -32,6 +34,7 @@
 ```text
 ./
 │   .editorconfig
+│   .env.example
 │   .gitignore
 │   .prettierignore
 │   commitlint.config.mjs
@@ -52,10 +55,36 @@
 ├───public                    # Static assets
 └───src
     ├───app                   # Routes (App Router)
-    ├───components            # Shared UI components
-    │   └───ui                # Generated shadcn/ui primitives
-    └───lib                   # Cross-cutting, safe-for-client utilities
+    ├───components            # Global/shared UI components
+    │   └───ui                    # Generated shadcn/ui primitives
+    ├───config                # App-wide configuration (env, site metadata)
+    ├───constants             # Global/shared constants
+    ├───features              # Business logic
+    │   └──<domain>
+    ├───hooks                 # Global reusable hooks
+    ├───lib                   # Global generic, helper functions
+    ├───store                 # Global state
+    └───types                 # Global/shared TS type
 ```
+
+- **Rule**:
+  - Each **feature** folder is self-contained ("closed") and exposes only its public API via `index.ts` (barrel export) - nothing outside the folder should import from its internals directly.
+  - Each feature folder (`features/<domain>`) may contain its own:
+
+    ```text
+    features/<domain>
+    ├───components
+    ├───constants
+    ├───hooks
+    ├───services
+    ├───schemas
+    ├───store
+    ├───utils
+    ├───types
+    └───index.ts
+    ```
+
+  - If a folder is shared by 2+ features, promote it to the global `src/` equivalent.
 
 ## How to run?
 
