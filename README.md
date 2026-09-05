@@ -20,6 +20,8 @@
 - UI Components: Shadcn/ui
 - Validation: Zod
 - HTTP client: Axios
+- State management: TanStack Query (Server state) and Zustand (client state)
+- Theme: `next-themes`
 - Linting/Formatting: ESLint, Prettier, EditorConfig
 - Git hooks: Husky, lint-staged, Commitlint
 
@@ -68,6 +70,7 @@
 ```
 
 - **Rule**:
+  - All domains (job, job-category, hiring...) fetch/cache through TanStack Query Client.
   - Each **feature** folder is self-contained ("closed") and exposes only its public API via `index.ts` (barrel export) - nothing outside the folder should import from its internals directly.
   - Each feature folder (`features/<domain>`) may contain its own:
 
