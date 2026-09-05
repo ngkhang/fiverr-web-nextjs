@@ -1,3 +1,4 @@
+import pluginQuery from '@tanstack/eslint-plugin-query';
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 import eslintConfigPrettier from 'eslint-config-prettier';
@@ -6,6 +7,7 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  ...pluginQuery.configs['flat/recommended-strict'],
   eslintConfigPrettier,
   // Override default ignores of eslint-config-next.
   globalIgnores([
